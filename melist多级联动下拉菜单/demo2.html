@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>melist多级联动下拉菜单可中文检索</title>
+	<link rel="stylesheet" href="css/styleme.css">
+	<link rel="stylesheet" href="css/melist.css">
+	<script src="http://apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+	<script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+	<!--拼音检索-->
+	<script src="js/jQuery.Hz2Py-min.js"></script>
+	<script src="js/melist.js"></script>
+
+
+</head>
+<body>
+<br><br>
+	<div class="forms wrapper">
+		<div class="formsTitle"><h2>多级联动及自动执行示例</h2></div>
+		<fieldset>
+			ol > li 里就是默认的表单，设置好name值及是radio或checkbox<br><<非服务器环境，谷歌浏览器快捷方式需 --allow-file-access-from-files>>
+		</fieldset>
+		<hr>
+		<dl>
+			<dt><i>*</i> 多级联动菜单 type="checkbox"：</dt>
+			<dd>
+				<!-- 多级连动型 class="linkage" type="checkbox" link="初始Ajax地址" -->
+				<span class="textroot linkage">
+					<ol><li><input name="zb" type="checkbox" class="" /></li></ol>
+					<div class="text">
+						<input type="text" placeholder="请选项目">
+						<ul class="soso" id="zhuban" data-link="json/01danwei.js"></ul>
+						<div class="more">更多</div>
+					</div>
+				</span>
+			</dd>
+		</dl>
+		<hr>
+
+		<dl>
+			<dt><i>*</i> 单选：</dt>
+			<dd>
+				<!-- 单一型(data-link地址获取json数据) type="radio" link="初始Ajax地址" -->
+				<span class="textroot">
+					<ol><li><input name="lx" type="radio" class="" /></li></ol>
+					<div class="text">
+						<input type="text">
+						<ul class="soso" id="leixing" data-link="json/02bangong.js"></ul>
+						<div class="more">更多</div>
+					</div>
+				</span>
+			</dd>
+		</dl>
+		<br>
+		<dl>
+			<dt><i>*</i> 多选：</dt>
+			<dd>
+				<!-- 多选型 type="checkbox" link="初始Ajax地址" -->
+				<span class="textroot">
+					<ol><li><input name="cs" type="checkbox" class="validate[required]" /></li></ol>
+					<div class="text">
+						<input type="text">
+						<ul class="soso" id="chaosong" data-link="json/03ren.js"></ul>
+						<div class="more">更多</div>
+					</div>
+				</span>
+			</dd>
+		</dl>
+
+	</div>
+
+
+
+<script type="text/javascript">
+	// ----可搜索式选项列表----
+	//初始化
+	melist();
+	//批量处理检索菜单，class="soso"上写data-link获取地址（soso需要有id=""）
+	linkageall();
+
+	
+</script>
+
+</body>
+</html>

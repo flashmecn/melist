@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>melist多级联动下拉菜单可中文检索</title>
+	<link rel="stylesheet" href="css/styleme.css">
+	<link rel="stylesheet" href="css/melist.css">
+	<script src="http://apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+	<script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+	<!--拼音检索-->
+	<script src="js/jQuery.Hz2Py-min.js"></script>
+	<script src="js/melist.js"></script>
+
+
+</head>
+<body>
+<br><br>
+	<div class="forms wrapper">
+		<div class="formsTitle"><h2>基本示例，支持中英文混合检索</h2></div>
+		<fieldset>
+			ol > li 里就是默认的表单，设置好name值及是radio或checkbox
+		</fieldset>
+		<hr>
+		<dl>
+			<dt><i>*</i> 单一型 type="radio"：</dt>
+			<dd>
+				<!-- 单一型 type="radio" -->
+				<span class="textroot">
+					<ol><li><input name="zs" type="radio" class="" /></li></ol>
+					<div class="text">
+						<input type="text">
+						<ul class="soso" id="zhusong"></ul>
+						<div class="more">更多</div>
+					</div>
+				</span>
+
+			</dd>
+		</dl>
+		<hr>
+
+		<dl>
+			<dt><i>*</i> 多选型 type="checkbox"：</dt>
+			<dd>
+				<!-- 多选型 type="checkbox" -->
+				<span class="textroot">
+					<ol><li><input name="cs" type="checkbox" class="" /></li></ol>
+					<div class="text">
+						<input type="text">
+						<ul class="soso" id="chaosong"></ul>
+						<div class="more">更多</div>
+					</div>
+				</span>
+
+			</dd>
+		</dl>
+		<hr>
+
+	</div>
+
+
+
+<script type="text/javascript">
+	// ----可搜索式选项列表----
+	//初始化
+	melist();
+
+	var Data1=[
+        {"id":"01","title":"赤峰市森林公安局"},
+        {"id":"02","title":"自治区森林公安局"},
+        {"id":"03","title":"巴林左旗森林公安局"},
+        {"id":"04","title":"松山区"},
+        {"id":"05","title":"红山区"},
+        {"id":"06","title":"赤峰市林业局"}
+    ]
+    var Data2=[
+	    {"id":"01","title":"你好"},
+	    {"id":"02","title":"hello world"},
+	    {"id":"03","title":"检索测试"},
+	    {"id":"04","title":"English"},
+	    {"id":"05","title":"Hi girl"},
+	    {"id":"06","title":"中文"},
+	    {"id":"06","title":"英文"},
+	    {"id":"06","title":"上中下左右"},
+	    {"id":"06","title":"完善功能是好累"}
+    ]
+
+    //主送单位
+	$('#zhusong').sotag(Data1,true,'<li></li>');
+	filteroption($('#zhusong'),'zhusong');
+
+	//抄送单位 | 复选型（数据同上）
+	$('#chaosong').sotag(Data2,true,'<li></li>');
+	filteroption($('#chaosong'),'chaosong');
+
+	// 可设置初始显示标签
+	$('#zhusong').oladd('01','name','Hi,默认标签','如果有下级json地址');
+	
+</script>
+
+</body>
+</html>
