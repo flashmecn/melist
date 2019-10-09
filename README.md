@@ -7,9 +7,8 @@
 
 #### 介绍
 多级联动下拉菜单，也可单选可多选，支持中英文混合检索，使用了jQuery.Hz2Py
-ol > li 里就是默认的表单，设置好name值及是radio或checkbox
+ol > li 里就是默认的表单，设置好name值及单选radio或多选checkbox
 
-注意：多级菜单不是一次读取！
 
 
 #### 使用说明
