@@ -38,7 +38,7 @@
 					</div>
 				</span>
 
-				<p style="color: #AAA">linkage="url" 逐级加载分类json数据</p>
+				<p style="color: #AAA">linkage="url" 逐级加载分类json数据<br>初始菜单需要$("linkageUrl")oladd()</p>
 			</dd>
 		</dl>
 		<hr>
@@ -55,7 +55,7 @@
 					</div>
 				</span>
 
-				<p style="color: #AAA">linkage="all" 一次全部加载分类json数据</p>
+				<p style="color: #AAA">linkage="all" 一次加载全部分类json数据<br>json数据里可设置"show":"true"初始菜单</p>
 			</dd>
 		</dl>
 		<hr>
@@ -110,6 +110,9 @@
 	$('#linkageUrl').bind('selected',function (ev,val) {
 		console.log('------最终结果：'+val.id, val.title)
 	})
+
+	//逐级加载分类的初始项
+	$('#linkageUrl').oladd('01','name','初始分类','json/02bangong.js');
 	
 </script>
 
