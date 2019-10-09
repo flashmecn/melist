@@ -23,7 +23,7 @@
 	        {"id":"05", "name":"bangong", "title":"监察科"}
 	        ]
     	},
-        {"id":"02", "name":"danwei", "title":"自治区森林公安局",
+        {"id":"02", "name":"danwei", "title":"自治区森林公安局", "show":"true",
 	        "link":[
 	        {"id":"01", "name":"bangong", "title":"办公室2",
 		        "link":[
@@ -33,9 +33,9 @@
 		        {"id":"04", "name":"ren", "title":"刘厅"}
 		        ]
 	    	},
-	        {"id":"02", "name":"bangong", "title":"警卫处2",
+	        {"id":"02", "name":"bangong", "title":"警卫处2", "show":"true",
 		        "link":[
-		        {"id":"01", "name":"ren", "title":"第二个"},
+		        {"id":"01", "name":"ren", "title":"第二个", "show":"true"},
 		        {"id":"02", "name":"ren", "title":"李处"},
 		        {"id":"03", "name":"ren", "title":"王主任"},
 		        {"id":"04", "name":"ren", "title":"刘厅"}
