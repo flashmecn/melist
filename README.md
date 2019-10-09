@@ -1,5 +1,10 @@
 # melist多级联动下拉菜单
 
+
+[演示1](https://flashmecn.github.io/melist/melist多级联动下拉菜单/demo.html)
+|
+[演示2](https://flashmecn.github.io/melist/melist多级联动下拉菜单/demo2.html)
+
 #### 介绍
 多级联动下拉菜单，也可单选可多选，支持中英文混合检索，使用了jQuery.Hz2Py
 ol > li 里就是默认的表单，设置好name值及是radio或checkbox
