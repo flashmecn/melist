@@ -1,4 +1,4 @@
-﻿/*
+/*
  * ==========================================
 // 夕空 | www.flashme.cn
  * ==========================================
@@ -146,6 +146,7 @@ function melist(){
                 activeArr=[];
                 sosoState();
             }else if($target.hasClass('linkage')){
+                activeArr=[];
                 $target.find('ol').append(newli);
             }else if(!$target.find('ol input[value="'+$(this).data('id')+'"]').prop('outerHTML')){
                 $target.find('ol').append(newli);
