@@ -78,7 +78,7 @@ function melist(){
         newli.data('title',title);
         newli.append(title);
         $target.append(newli);
-        if($target.hasClass('linkage') && !link){
+        if($target.attr('linkage') && !link){
             $('body .sosobg').trigger("mousedown");
             $target.find("input[type=text]").hide();
         }
@@ -145,22 +145,25 @@ function melist(){
                 $target.find('ol').html(newli);
                 activeArr=[];
                 sosoState();
-            }else if($target.hasClass('linkage')){
+            }else if($target.attr('linkage')){
                 activeArr=[];
                 $target.find('ol').append(newli);
             }else if(!$target.find('ol input[value="'+$(this).data('id')+'"]').prop('outerHTML')){
                 $target.find('ol').append(newli);
             }
+            var valObj={id:$(this).data('id'),title:$(this).html(),link:$(this).data('link')}
+            //联动结尾隐藏输入框判断
+            if($target.attr('linkage') && !$(this).data('link')){
+                $('body .sosobg').trigger("mousedown");
+                $target.find("input[type=text]").hide();
+                $target.find(".soso").trigger("selected", valObj);
+            }
             if(soparams[thisid] && $(this).data('link')){
                 soparams[thisid]($(this).data('link'), thisid);
             }
-            //联动结尾隐藏输入框判断
-            if($target.hasClass('linkage') && !$(this).data('link')){
-                $('body .sosobg').trigger("mousedown");
-                $target.find("input[type=text]").hide();
-            }
             $(this).addClass('active');
             activeArr.push($(this).html());
+            $target.find(".soso").trigger("select", valObj);
         })
         $target.find(".more").click(function(){
             setTimeout(function () {
@@ -183,12 +186,14 @@ function melist(){
                 activeArr.splice(index, 1);
             }
             //联动显示判断
-            if($target.hasClass('linkage')){
+            if($target.attr('linkage')){
                 $(this).nextAll().remove();
                 $target.find("input[type=text]").show();
                 if(soparams[thisid]){
                     if($(this).prev().prop('outerHTML')){
                         soparams[thisid]($(this).prev().data('link'), thisid);
+                    }else if($target.attr('linkage')=="all"){
+                        soparams[thisid]($target.find(".soso").data('dataAll'), thisid);
                     }else{
                         startlink=$target.find(".soso").data('link');
                         soparams[thisid](startlink, thisid);
@@ -210,7 +215,7 @@ function melist(){
             if(event.keyCode ==13){
                 $target.find('.soso li:eq(0)').trigger("click");
                 $target.find("input[type=text]").val('');
-                if($target.hasClass('linkage')){
+                if($target.attr('linkage')){
                     return;
                 }
                 $target.find(".soso").hide();
@@ -233,9 +238,14 @@ function linkageall(){
             success:function(ev){
 
                 //----更新列表内容
-                if(linkage){
+                if(linkage=='url'){
                     $target.sotag(ev.infor, true, '<li></li>', function(newurl,id){
-                        getLinkage(newurl,$('#'+id));
+                        getLinkage(newurl,$('#'+id),linkage);
+                    });
+                }else if(linkage=='all'){
+                    $target.data('dataAll',ev.infor);
+                    $target.sotag(ev.infor, true, '<li></li>', function(subData,id){
+                        getLinkageAll(subData,$('#'+id));
                     });
                 }else{
                     $target.sotag(ev.infor, true, '<li></li>');
@@ -248,9 +258,16 @@ function linkageall(){
             }
         })
     }
+    function getLinkageAll(subData,$target){
+        $target.sotag(subData, true, '<li></li>', function(subData,id){
+            getLinkageAll(subData,$('#'+id));
+            filteroption($('#'+id), id);
+        });
+    }
+
     $('.textroot').each(function(){
         if($(this).find('.soso').data('link')){
-            getLinkage($(this).find('.soso').data('link'), $(this).find('.soso'), $(this).hasClass('linkage'));
+            getLinkage($(this).find('.soso').data('link'), $(this).find('.soso'), $(this).attr('linkage'));
         }
     })
     
