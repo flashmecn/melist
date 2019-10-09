@@ -18,24 +18,44 @@
 	<div class="forms wrapper">
 		<div class="formsTitle"><h2>多级联动及自动执行示例</h2></div>
 		<fieldset>
-			ol > li 里就是默认的表单，设置好name值及是radio或checkbox<br>
+			ol > li 里就是默认的表单，设置好name值及是单选radio或多选checkbox<br>
 			注意：json数据里的name值是可以改变表单name值的（方便多级菜单使用）<br>
 			默认表单只为拉取结构用途，添加初始呈现表单，请使用oladd('01','name','Hi,默认标签','如果有下级json地址')<br>
+			多级连动菜单需要class="linkage" linkage="url|all" link="初始Ajax地址" type="checkbox"<br>
 			<<非服务器环境，谷歌浏览器快捷方式需 --allow-file-access-from-files>>
 		</fieldset>
 		<hr>
 		<dl>
-			<dt><i>*</i> 多级联动菜单 type="checkbox"：</dt>
+			<dt><i>*</i> 逐级加载-多级联动菜单：</dt>
 			<dd>
-				<!-- 多级连动型 class="linkage" type="checkbox" link="初始Ajax地址" -->
-				<span class="textroot linkage">
+				<!-- 多级连动型 class="linkage" linkage="url" type="checkbox" link="初始Ajax地址" -->
+				<span class="textroot linkage" linkage="url">
 					<ol><li><input name="zb" type="checkbox" class="" /></li></ol>
 					<div class="text">
 						<input type="text" placeholder="请选项目">
-						<ul class="soso" id="zhuban" data-link="json/01danwei.js"></ul>
+						<ul class="soso" id="linkageUrl" data-link="json/01danwei.js"></ul>
 						<div class="more">更多</div>
 					</div>
 				</span>
+
+				<p style="color: #AAA">linkage="url" 逐级加载分类json数据</p>
+			</dd>
+		</dl>
+		<hr>
+		<dl>
+			<dt><i>*</i> 全部加载-多级联动菜单：</dt>
+			<dd>
+				<!-- 多级连动型 class="linkage" linkage="all" type="checkbox" link="初始Ajax地址" -->
+				<span class="textroot linkage" linkage="all">
+					<ol><li><input name="zb" type="checkbox" class="" /></li></ol>
+					<div class="text">
+						<input type="text" placeholder="请选项目">
+						<ul class="soso" id="linkageAll" data-link="json/all.js"></ul>
+						<div class="more">更多</div>
+					</div>
+				</span>
+
+				<p style="color: #AAA">linkage="all" 一次全部加载分类json数据</p>
 			</dd>
 		</dl>
 		<hr>
@@ -78,9 +98,18 @@
 	// ----可搜索式选项列表----
 	//初始化
 	melist();
-	//批量处理检索菜单，class="soso"上写data-link获取地址（soso需要有id=""）
+	//批量处理检索菜单，"soso"上要写data-link获取地址（soso需要有id=""）
 	linkageall();
 
+
+	//监听选择事件
+	$('#linkageUrl').bind('select',function (ev,val) {
+		console.log(val.id, val.title)
+	})
+	//监听最终选择事件
+	$('#linkageUrl').bind('selected',function (ev,val) {
+		console.log('------最终结果：'+val.id, val.title)
+	})
 	
 </script>
 
