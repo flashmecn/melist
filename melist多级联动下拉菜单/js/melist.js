@@ -47,10 +47,10 @@ function resetOption(keys, $root) {
 //==========================================
 function melist(){
     var soparams={};//存储链接事件
-    $.fn.sotag=function(data,clear,taghtml,onclick){
+    $.fn.sotag=function(data,clear,taghtml,getlink){
         var $target=this;
-        if(onclick){
-            soparams[$target.attr('id')]=onclick;
+        if(getlink){
+            soparams[$target.attr('id')]=getlink;
         }
         if(clear){
             $target.html('');
@@ -68,7 +68,8 @@ function melist(){
         }
     }
     $.fn.oladd=function(id,name,title,link){
-        var $target=this.closest('.textroot').find('ol');
+        var $root=this.closest('.textroot');
+        var $target=$root.find('ol');
         $target.children('.start').remove();
         var newli=$($target.data('li'));
         newli.find("input").prop('checked', true);
@@ -78,10 +79,20 @@ function melist(){
         newli.data('title',title);
         newli.append(title);
         $target.append(newli);
-        if($target.attr('linkage') && !link){
-            $('body .sosobg').trigger("mousedown");
-            $target.find("input[type=text]").hide();
+        if($root.attr('linkage')=="url"){//处理逐级加载的
+            if(!link || !window.getLinkage){
+                $root.find("input[type=text]").hide();
+               return;
+            }
+            window.getLinkage(link,this,'url');
+
+        }else if($root.attr('linkage')=="all"){//处理全级加载的
+            if(!link || !window.getLinkage){
+                $root.find("input[type=text]").hide();
+               return;
+            }
         }
+        
     }
     $.fn.olclear=function(){
         var $target=this.closest('.textroot').find('ol li');
@@ -231,7 +242,7 @@ function melist(){
 //START: Ajax获取列表&多级联动型
 function linkageall(){
     
-    function getLinkage(url,$target,linkage){
+    window.getLinkage=function(url,$target,linkage){
         $.ajax({
             url:url,
             dataType:"json",
@@ -240,13 +251,14 @@ function linkageall(){
                 //----更新列表内容
                 if(linkage=='url'){
                     $target.sotag(ev.infor, true, '<li></li>', function(newurl,id){
-                        getLinkage(newurl,$('#'+id),linkage);
+                        window.getLinkage(newurl,$('#'+id),linkage);
                     });
                 }else if(linkage=='all'){
                     $target.data('dataAll',ev.infor);
                     $target.sotag(ev.infor, true, '<li></li>', function(subData,id){
-                        getLinkageAll(subData,$('#'+id));
+                        window.getLinkageAll(subData,$('#'+id));
                     });
+                    showBtn(ev.infor,$target);//初始show菜单
                 }else{
                     $target.sotag(ev.infor, true, '<li></li>');
                 }
@@ -258,16 +270,28 @@ function linkageall(){
             }
         })
     }
-    function getLinkageAll(subData,$target){
+    window.getLinkageAll=function(subData,$target){
         $target.sotag(subData, true, '<li></li>', function(subData,id){
-            getLinkageAll(subData,$('#'+id));
+            window.getLinkageAll(subData,$('#'+id));
             filteroption($('#'+id), id);
         });
+    }
+    function showBtn(infor,$target){
+        for(var k in infor){
+            if(infor[k].show=="true"){
+                window.getLinkageAll(infor[k].link, $target);
+                $target.oladd(infor[k].id,infor[k].name,infor[k].title,infor[k].link);
+                if(infor[k].link){
+                    showBtn(infor[k].link, $target);
+                }
+                return;
+            }
+        }
     }
 
     $('.textroot').each(function(){
         if($(this).find('.soso').data('link')){
-            getLinkage($(this).find('.soso').data('link'), $(this).find('.soso'), $(this).attr('linkage'));
+            window.getLinkage($(this).find('.soso').data('link'), $(this).find('.soso'), $(this).attr('linkage'));
         }
     })
     
