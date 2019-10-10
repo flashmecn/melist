@@ -32,7 +32,7 @@
     font-size: 16px;position: relative;z-index: 98;display: block;box-shadow:none;
 }
 .soso {
-    display: none; width: 200px; height: 72px;padding: 32px 0 36px 0; overflow: hidden; background: #FFFFFF;
+    display: none; width: 200px; height: 142px;padding: 32px 0 36px 0; overflow: hidden; background: #FFFFFF;
     position: absolute; left: -2px;top: -5px;z-index: 99;white-space:normal;
     border: #E5E5E5 1px solid;border-radius: 0;box-shadow:2px 2px 8px rgba(0,0,0,0.2);
     *word-spacing:-1px;font-size: 0; text-align: left;
@@ -46,6 +46,6 @@
 .soso li.active{color: #BBB; background: #EDEDED;cursor:default;}
 .textroot .more{
     display: none; width: 190px; height: 32px; line-height: 32px; text-align: center;font-size: 16px;
-    background: #E5E5E5; color: #777; cursor: pointer; position: absolute; left: 4px;top: 100px;z-index: 99;
+    background: #E5E5E5; color: #777; cursor: pointer; position: absolute; left: 4px;top: 170px;z-index: 99;
 }
 .sosobg{position: fixed;left: 0;top: 0; z-index: 1;width: 100%;height: 100%;}
