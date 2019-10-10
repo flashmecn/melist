@@ -102,6 +102,10 @@
 	linkageall();
 
 
+	//监听初始表单结果
+	$('#linkageAll').bind('initial',function (ev,val) {
+		console.log('初始结果：'+val.id, val.title)
+	})
 	//监听选择事件
 	$('#linkageUrl').bind('select',function (ev,val) {
 		console.log(val.id, val.title)
