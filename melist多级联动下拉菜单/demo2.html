@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<title>melist多级联动下拉菜单可中文检索</title>
 	<link rel="stylesheet" href="css/styleme.css">
-	<link rel="stylesheet" href="css/melist.css">
+	<link rel="stylesheet" href="css/melist.css" id="mecss">
 	<script src="http://apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
 	<script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
 	<!--拼音检索-->
@@ -61,7 +61,7 @@
 		<hr>
 
 		<dl>
-			<dt><i>*</i> 单选：</dt>
+			<dt>单选：</dt>
 			<dd>
 				<!-- 单一型(data-link地址获取json数据) type="radio" link="初始Ajax地址" -->
 				<span class="textroot">
@@ -76,7 +76,7 @@
 		</dl>
 		<br>
 		<dl>
-			<dt><i>*</i> 多选：</dt>
+			<dt>多选：</dt>
 			<dd>
 				<!-- 多选型 type="checkbox" link="初始Ajax地址" -->
 				<span class="textroot">
@@ -87,6 +87,13 @@
 						<div class="more">更多</div>
 					</div>
 				</span>
+			</dd>
+		</dl>
+		<hr>
+		<dl>
+			<dt>切换样式：</dt>
+			<dd id="cssBtn">
+				<button>melist2.css</button><button>melist.css</button>
 			</dd>
 		</dl>
 
@@ -117,6 +124,10 @@
 
 	//逐级加载分类的初始项
 	$('#linkageUrl').oladd('01','name','初始分类','json/02bangong.js');
+
+	$('#cssBtn').on('click','button',function(event) {
+		$('#mecss').attr('href','css/'+$(this).html());
+	});
 	
 </script>
 
