@@ -112,7 +112,9 @@ function melist(){
         $target.find("input[type=text]").bind("propertychange input focus",function(event){
             resetOption($.trim($(this).val()), $target.find(".soso"));
             inputfocus();
-            sosoState();
+            if(!$target.attr('linkage')){
+                sosoState();
+            }
         })
         function inputfocus(){
             $('.textroot .soso').hide();
@@ -162,7 +164,7 @@ function melist(){
             }else if(!$target.find('ol input[value="'+$(this).data('id')+'"]').prop('outerHTML')){
                 $target.find('ol').append(newli);
             }
-            var valObj={id:$(this).data('id'),title:$(this).html(),link:$(this).data('link')}
+            var valObj={id:$(this).data('id'),title:$(this).html(),link:$(this).data('link'),name:$(this).data('name')}
             $target.find(".soso").trigger("select", valObj);
             //联动结尾隐藏输入框判断
             if($target.attr('linkage') && !$(this).data('link')){
@@ -211,6 +213,8 @@ function melist(){
                     }
                 }
                 $target.find("input[type=text]").focus();
+            }else{
+                sosoState();
             }
             //判断是否删空
             if($(this).parent().children('li').length==1){
@@ -218,8 +222,6 @@ function melist(){
             }else{
                 $(this).remove();
             }
-            //更新
-            sosoState();
         })
         //键盘回车事件
         $target.keyup(function(event){
