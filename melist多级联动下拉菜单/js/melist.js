@@ -163,6 +163,7 @@ function melist(){
                 $target.find('ol').append(newli);
             }
             var valObj={id:$(this).data('id'),title:$(this).html(),link:$(this).data('link')}
+            $target.find(".soso").trigger("select", valObj);
             //联动结尾隐藏输入框判断
             if($target.attr('linkage') && !$(this).data('link')){
                 $('body .sosobg').trigger("mousedown");
@@ -174,7 +175,6 @@ function melist(){
             }
             $(this).addClass('active');
             activeArr.push($(this).html());
-            $target.find(".soso").trigger("select", valObj);
         })
         $target.find(".more").click(function(){
             setTimeout(function () {
