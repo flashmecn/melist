@@ -283,6 +283,8 @@ function linkageall(){
                 $target.oladd(infor[k].id,infor[k].name,infor[k].title,infor[k].link);
                 if(infor[k].link){
                     showBtn(infor[k].link, $target);
+                }else{
+                    $target.trigger("initial", {id:infor[k].id,title:infor[k].title});
                 }
                 return;
             }
