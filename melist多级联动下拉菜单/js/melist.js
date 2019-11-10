@@ -195,6 +195,7 @@ function melist(){
         //结果项点击清除事件
         $target.find('ol').on('click','li',function(){
             var index=activeArr.indexOf($(this).data('title'));
+            var valObj;
             if(index>-1){
                 activeArr.splice(index, 1);
             }
@@ -204,6 +205,13 @@ function melist(){
                 $target.find("input[type=text]").show();
                 if(soparams[thisid]){
                     if($(this).prev().prop('outerHTML')){
+                        //点击清掉返回前一个值
+                        valObj={
+                            id:$(this).prev().find('input').val(),
+                            name:$(this).prev().find('input').attr('name'),
+                            title:$(this).prev().data('title'),
+                            link:$(this).prev().data('link')
+                        }
                         soparams[thisid]($(this).prev().data('link'), thisid);
                     }else if($target.attr('linkage')=="all"){
                         soparams[thisid]($target.find(".soso").data('dataAll'), thisid);
@@ -219,8 +227,11 @@ function melist(){
             //判断是否删空
             if($(this).parent().children('li').length==1){
                 $(this).parent().html($(olinput).addClass('start'));
+                $target.find(".soso").trigger("clean",false);
+                $target.find(".soso").trigger("cleanest");
             }else{
                 $(this).remove();
+                $target.find(".soso").trigger("clean",valObj?valObj:"");
             }
         })
         //键盘回车事件
