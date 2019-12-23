@@ -1,9 +1,10 @@
 # melist多级联动下拉菜单
 
+![演示](melist多级联动下拉菜单/演示.gif)
 
-[演示1](melist多级联动下拉菜单/demo.html)
+[演示1](https://flashmecn.github.io/melist/melist%E5%A4%9A%E7%BA%A7%E8%81%94%E5%8A%A8%E4%B8%8B%E6%8B%89%E8%8F%9C%E5%8D%95/demo.html)
 |
-[演示2](melist多级联动下拉菜单/demo2.html)
+[演示2](https://flashmecn.github.io/melist/melist%E5%A4%9A%E7%BA%A7%E8%81%94%E5%8A%A8%E4%B8%8B%E6%8B%89%E8%8F%9C%E5%8D%95/demo2.html)
 
 #### 介绍
 多级联动下拉菜单，也可单选可多选，支持中英文混合检索，使用了jQuery.Hz2Py
