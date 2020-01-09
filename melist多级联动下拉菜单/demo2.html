@@ -121,6 +121,14 @@
 	$('#linkageUrl').bind('selected',function (ev,val) {
 		console.log('------最终结果：'+val.id, val.title)
 	})
+	//删除已选项事件
+	$('#linkageUrl').bind('clean',function (ev,val) {
+		console.log('------删除一项，留存的是：'+val.id, val.title)
+	})
+	//删除全部已选项事件
+	$('#linkageUrl').bind('cleanest',function (ev,val) {
+		console.log('------已清空')
+	})
 
 	//逐级加载分类的初始项
 	$('#linkageUrl').oladd('01','name','初始分类','json/02bangong.js');
