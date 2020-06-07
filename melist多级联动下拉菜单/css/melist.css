@@ -3,14 +3,14 @@
  * 搜索列表
 \*---------------------*/ 
 .textroot{
-    position: relative !important;display: table;float: left;background: #FFF;
+    position: relative !important;display: inline-block;*display: table; background: #FFF;
     padding: 0 4px !important;font-size: 0 !important;line-height: 32px;border: #ddd 1px solid;
 }
 .textroot> ol{
     display: inline-block;vertical-align: middle;font-size: 0;margin: 0;
 }
 .textroot> ol li{
-    display: inline-block;vertical-align: middle;font-size: 16px;border-radius: 4px;
+    display: inline-block;vertical-align: middle;font-size: 15px;border-radius: 4px;
     background: #009BE8;color: #FFF; padding: 0 14px; margin: 0 4px; line-height: 28px;
     position: relative;cursor:pointer;
 }
@@ -34,12 +34,12 @@
 .soso {
     display: none; width: 400px; height: 72px;padding: 32px 0 36px 0; overflow: hidden; background: #F6FAFC;
     position: absolute; left: -2px;top: -5px;z-index: 99;white-space:normal;
-    border: #E5E5E5 1px solid;border-radius: 4px;box-shadow:2px 2px 8px rgba(0,0,0,0.2);
+    border: #E5E5E5 1px solid;border-radius: 4px;box-shadow:8px 8px 20px rgba(0,0,0,0.16),-4px -4px 10px rgba(255,255,255,0.4);
     *word-spacing:-1px;font-size: 0; text-align: left;
 }
 .soso li{
     display: inline-block; *display: inline; *zoom:1; vertical-align: middle;
-    font-size: 16px; word-spacing:normal; letter-spacing: normal;
+    font-size: 15px; word-spacing:normal; letter-spacing: normal;
     color: #2B489D; padding: 0 10px; margin: 2px 4px; line-height: 32px;cursor:pointer;
     -moz-border-radius: 4px;      /* Gecko browsers */
     -webkit-border-radius: 4px;   /* Webkit browsers */
@@ -48,7 +48,7 @@
 .soso li:hover{color: #FFF; background: #49567C;}
 .soso li.active{color: #BBB; background: #EDEDED;cursor:default;}
 .textroot .more{
-    display: none; width: 392px; height: 28px; line-height: 28px; text-align: center;font-size: 16px;border-radius: 6px;
-    background: #E5E5E5; color: #777; cursor: pointer; position: absolute; left: 4px;top: 105px;z-index: 99;
+    display: none; width: 396px; height: 32px; line-height: 32px; text-align: center;font-size: 16px;border-radius: 6px;
+    background: #E5E5E5; color: #777; cursor: pointer; position: absolute; left: 1px;top: 102px;z-index: 99;
 }
 .sosobg{position: fixed;left: 0;top: 0; z-index: 1;width: 100%;height: 100%;}
