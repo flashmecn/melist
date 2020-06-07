@@ -267,11 +267,7 @@ function linkageall(){
                         window.getLinkage(newurl,$('#'+id),linkage);
                     });
                 }else if(linkage=='all'){
-                    $target.data('dataAll',ev.infor);
-                    $target.sotag(ev.infor, true, '<li></li>', function(subData,id){
-                        window.getLinkageAll(subData,$('#'+id));
-                    });
-                    showBtn(ev.infor,$target);//初始show菜单
+                    window.setLinkageAll($target, ev.infor);
                 }else{
                     $target.sotag(ev.infor, true, '<li></li>');
                 }
@@ -288,6 +284,13 @@ function linkageall(){
             window.getLinkageAll(subData,$('#'+id));
             filteroption($('#'+id), id);
         });
+    }
+    window.setLinkageAll=function ($target,data) {
+        $target.data('dataAll',data);
+        $target.sotag(data, true, '<li></li>', function (subData, id) {
+            window.getLinkageAll(subData, $('#' + id));
+        });
+        showBtn(data, $target);//初始show菜单
     }
     function showBtn(infor,$target){
         for(var k in infor){
