@@ -37,8 +37,8 @@
 						<div class="more">更多</div>
 					</div>
 				</span>
-
-				<p style="color: #AAA">linkage="url" 逐级加载分类json数据<br>初始菜单需要$("linkageUrl")oladd()</p>
+<br>
+				<p style="color: #AAA">linkage="url" 逐级加载分类json数据，适合列表数据庞大分次读库的方式<br>初始菜单需要$("linkageUrl").oladd()</p>
 			</dd>
 		</dl>
 		<hr>
@@ -56,6 +56,23 @@
 				</span>
 
 				<p style="color: #AAA">linkage="all" 一次加载全部分类json数据<br>json数据里可设置"show":"true"初始菜单</p>
+			</dd>
+		</dl>
+		<hr>
+		<dl>
+			<dt><i>*</i> 直接赋值-多级联动菜单：</dt>
+			<dd>
+				<!-- 多级连动型 class="linkage" linkage="all" type="checkbox" link="初始Ajax地址" -->
+				<span class="textroot linkage" linkage="all">
+					<ol><li><input name="zb" type="checkbox" class="" /></li></ol>
+					<div class="text">
+						<input type="text" placeholder="请选项目">
+						<ul class="soso" id="linkageAll2"></ul>
+						<div class="more">更多</div>
+					</div>
+				</span>
+
+				<p style="color: #AAA">针对页面已经有json数据树的直接赋值<br>json数据里可设置"show":"true"初始菜单</p>
 			</dd>
 		</dl>
 		<hr>
@@ -136,6 +153,41 @@
 	$('#cssBtn').on('click','button',function(event) {
 		$('#mecss').attr('href','css/'+$(this).html());
 	});
+
+
+	//页面已有数据的直接赋值
+	var jsondata = {
+		infor: [
+			{
+				id: "01", name: "danwei", title: "赤峰市森林公安局",
+				"link": [
+					{
+						id: "01", name: "bangong", title: "办公室",
+						"link": [
+							{ id: "01", name: "ren", title: "张局" },
+							{ id: "02", name: "ren", title: "李处" }
+						]
+					},
+					{
+						id: "02", name: "bangong", title: "警卫处",
+						"link": [
+							{ id: "01", name: "ren", title: "第二个" },
+							{ id: "02", name: "ren", title: "李处" }
+						]
+					}
+				]
+			},
+			{
+				id: "02", name: "danwei", title: "自治区森林公安局", "show": "true",
+				"link": [
+					{
+						id: "01", name: "bangong", title: "办公室2"
+					}
+				]
+			}
+		]
+	}
+	window.setLinkageAll($("#linkageAll2"),jsondata.infor);
 	
 </script>
 
