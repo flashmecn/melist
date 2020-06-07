@@ -7,8 +7,9 @@
 [演示2](https://flashmecn.github.io/melist/melist%E5%A4%9A%E7%BA%A7%E8%81%94%E5%8A%A8%E4%B8%8B%E6%8B%89%E8%8F%9C%E5%8D%95/demo2.html)
 
 #### 介绍
-多级联动下拉菜单，也可单选可多选，支持中英文混合检索，使用了jQuery.Hz2Py
-ol > li 里就是默认的表单，设置好name值及单选radio或多选checkbox
+多级联动下拉菜单，也可单选可多选，支持中英文混合检索，
+使用了jQuery.Hz2Py，支持拼音检索中文
+
 
 
 
