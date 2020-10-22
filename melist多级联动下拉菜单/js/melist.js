@@ -1,6 +1,7 @@
 /*
  * ==========================================
 // 夕空 | www.flashme.cn
+// 2020-10-22
  * ==========================================
 */
 function filteroption($root,$id) {  //初始化列表，(对象,ID)
@@ -32,7 +33,7 @@ function resetOption(keys, $root) {
     }
     if (keys.length <= 0) {
         duplul.children().each(function() {
-            $root.append($(this).clone(true).removeAttr("mka").removeAttr("mkb").removeAttr("mkc"));  
+            $root.append($(this).clone(true).removeAttr("mka").removeAttr("mkb").removeAttr("mkc"));
         });
         return;
     }
@@ -315,3 +316,112 @@ function linkageall(){
     
 }
 //END
+
+
+//==========================================树形菜单
+
+var treelist = function ($root, $input) {
+    function tree() {
+        $root.on('click', 'li.parent_li > span', function (e) {
+            var children = $(this).siblings('ul');
+            if (children.children('li').length == 0) {
+                return;
+            }
+            treesub(children, $(this), true);
+            e.stopPropagation();
+        });
+        $root.on('click', '.check', function (e) {
+            var findul = $(this).closest('li').find('ul');
+            if (findul && findul.find('.check').length > 0) {
+                $(this).prop('checked')==true ? findul.find('.check').prop('checked',true) : findul.find('.check').prop('checked',false)
+            }
+            e.stopPropagation();
+        });
+        $root.find('li:has(ul)').addClass('parent_li');
+    }
+    function treesub($target, ev, open) {
+        if (!$target.is(":visible") && open) {
+            $target.show('fast');
+            ev.attr('title', '收起分支').find(' > i').addClass('fa-minus-square-o').removeClass('fa-plus-square-o');
+        } else {
+            $target.hide('fast');
+            ev.attr('title', '展开分支').find(' > i').addClass('fa-plus-square-o').removeClass('fa-minus-square-o');
+        }
+    }
+
+    function filteroption() {
+        $root.find('h3').each(function () {
+            var htmword = $(this).text();
+            var pyword = $(this).parent().toPinyin();
+            var supperword = "";
+            pyword.replace(/[A-Z]/g, function (word) { supperword += word });
+            $(this).parent().attr("mka", (htmword).toLowerCase());
+            $(this).parent().attr("mkb", (pyword).toLowerCase());
+            $(this).parent().attr("mkc", (supperword).toLowerCase());
+        });
+    }
+    function resetOption(keys) {
+        if (keys.length <= 0) {
+            $root.find('span').removeClass('hideso');
+            return;
+        }
+        $root.find('span').addClass('hideso');
+        $root.find('[mka*="' + keys + '"],[mkb*="' + keys + '"],[mkc*="' + keys + '"]').each(function () {
+            $(this).removeClass('hideso');
+        });
+    }
+    
+    $input.bind("propertychange input focus", function (event) {
+        $root.find('ul').show();
+        $root.find('.parent_li span:has(+ul>li)').attr('title', '收起分支').find(' > i').addClass('fa-minus-square-o').removeClass('fa-plus-square-o');
+        resetOption($.trim($(this).val()));
+    })
+
+    function fordata(dom, data) {
+        for (var k in data) {
+            var treeli = $($('#treeli').html());
+            treeli.find('h3').text(data[k].title)
+            treeli.find('.check').attr('name', data[k].name)
+            treeli.find('.check').val(data[k].id)
+            dom.append(treeli);
+            if (data[k].link && data[k].link.length > 0) {
+                fordata(treeli.find('ul'), data[k].link);
+            }else{
+                treeli.find('span i').hide();
+            }
+        }
+
+    }
+
+    return {
+
+        init: function(jsondata){
+            if(jsondata){
+                fordata($('.tree ul'),jsondata);
+            }
+            
+            filteroption();
+            tree();
+
+        },
+        show: function(){
+            
+            $root.find('>ul ul').each(function(el){
+                var ul = $(this);
+                if (ul.children('li').length == 0) {
+                    return true;
+                }
+                treesub(ul, ul.siblings('span'), true);
+            })
+        },
+        hide: function(){
+            $root.find('>ul ul').each(function(el){
+                var ul = $(this);
+                if (ul.children('li').length == 0) {
+                    return true;
+                }
+                treesub(ul, ul.siblings('span'), false);
+            })
+        }
+    }
+}

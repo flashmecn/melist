@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>melist树状菜单可中文检索</title>
+	<link rel="stylesheet" href="css/styleme.css">
+	<link rel="stylesheet" href="css/melist.css" id="mecss">
+	<script src="http://apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+	<script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+	<!--拼音检索-->
+	<script src="js/jQuery.Hz2Py-min.js"></script>
+	<script src="js/melist.js"></script>
+
+
+</head>
+<body>
+<br><br>
+	<div class="forms wrapper">
+		<hr>
+		<dl>
+			<dt><i>*</i> 树状菜单</dt>
+			<dd>
+				<input type="text" class="treeinput" placeholder="检索">
+
+				<div class="tree">
+					<ul>
+						
+					</ul>
+				</div>
+
+			</dd>
+		</dl>
+
+	</div>
+
+<script type="text/html" id="treeli">
+	<li>
+		<span>
+			<i class="fa"></i>
+			<input class="check" type="checkbox">
+			<h3>标题</h3>
+			<div class="btn bg-ju">修改</div>
+		</span>
+		<ul></ul>
+	</li>
+</script>
+
+
+<script type="text/javascript">
+
+	var jsondata = {
+		infor: [
+			{
+				id: "01", name: "danwei", title: "赤峰市",
+				"link": [
+					{
+						id: "01", name: "bangong", title: "办公室",
+						"link": [
+							{ id: "01", name: "ren", title: "张局" },
+							{ id: "02", name: "ren", title: "李处" }
+						]
+					},
+					{
+						id: "02", name: "bangong", title: "警卫处",
+						"link": [
+							{ id: "01", name: "ren", title: "张局" },
+							{ id: "02", name: "ren", title: "王队" }
+						]
+					}
+				]
+			},
+			{
+				id: "02", name: "danwei", title: "内蒙古",
+				"link": [
+					{
+						id: "01", name: "bangong", title: "办公室2"
+					}
+				]
+			}
+		]
+	}
+
+	var treesoso = new treelist($('.tree'), $(".treeinput"));
+	treesoso.init(jsondata.infor);
+	treesoso.show();
+
+	
+</script>
+
+<!-- 图标样式 -->
+<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+</body>
+</html>
