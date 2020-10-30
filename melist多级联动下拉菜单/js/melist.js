@@ -352,7 +352,7 @@ var treelist = function ($root, $input) {
     function filteroption() {
         $root.find('h3').each(function () {
             var htmword = $(this).text();
-            var pyword = $(this).parent().toPinyin();
+            var pyword = $(this).toPinyin();
             var supperword = "";
             pyword.replace(/[A-Z]/g, function (word) { supperword += word });
             $(this).parent().attr("mka", (htmword).toLowerCase());
