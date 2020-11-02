@@ -6,6 +6,7 @@
     position: relative !important;display: inline-block;*display: table; background: #FFF;
     padding: 0 4px !important;font-size: 0 !important;line-height: 32px;border: #ddd 1px solid;
 }
+.textroot,.textroot *{box-sizing: content-box;}
 .textroot> ol{
     display: inline-block;vertical-align: middle;font-size: 0;margin: 0;
 }

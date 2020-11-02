@@ -267,12 +267,13 @@ function linkageall(){
                     $target.sotag(ev.infor, true, '<li></li>', function(newurl,id){
                         window.getLinkage(newurl,$('#'+id),linkage);
                     });
+                    filteroption($target, $target.attr('id'));
                 }else if(linkage=='all'){
                     window.setLinkageAll($target, ev.infor);
                 }else{
                     $target.sotag(ev.infor, true, '<li></li>');
+                    filteroption($target, $target.attr('id'));
                 }
-                filteroption($target, $target.attr('id'));
                 //----
             },
             error: function (XHR) {
@@ -291,6 +292,7 @@ function linkageall(){
         $target.sotag(data, true, '<li></li>', function (subData, id) {
             window.getLinkageAll(subData, $('#' + id));
         });
+        filteroption($target, $target.attr('id'));
         showBtn(data, $target);//初始show菜单
     }
     function showBtn(infor,$target){
