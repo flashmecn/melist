@@ -96,7 +96,8 @@ function melist(){
         
     }
     $.fn.olclear=function(){
-        this.trigger("clear");
+        var $target=this.closest('.textroot').find('ol li');
+        $target.trigger("click");
     }
     $('.textroot').each(function(){
         var activeArr=[];
@@ -165,18 +166,18 @@ function melist(){
                 $target.find('ol').append(newli);
             }
             var valObj={id:$(this).data('id'),title:$(this).html(),link:$(this).data('link'),name:$(this).data('name')}
-            if(soparams[thisid] && $(this).data('link')){
-                soparams[thisid]($(this).data('link'), thisid);
-            }
-            $(this).addClass('active');
-            activeArr.push($(this).html());
+            $target.find(".soso").trigger("select", valObj);
             //联动结尾隐藏输入框判断
             if($target.attr('linkage') && !$(this).data('link')){
                 $('body .sosobg').trigger("mousedown");
                 $target.find("input[type=text]").hide();
                 $target.find(".soso").trigger("selected", valObj);
             }
-            $target.find(".soso").trigger("select", valObj);
+            if(soparams[thisid] && $(this).data('link')){
+                soparams[thisid]($(this).data('link'), thisid);
+            }
+            $(this).addClass('active');
+            activeArr.push($(this).html());
         })
         $target.find(".more").click(function(){
             setTimeout(function () {
@@ -192,23 +193,6 @@ function melist(){
             $target.find("input[type=text]").blur();
             $target.find("input[type=text]").css('z-index','98');
         });
-        //完全清除事件
-        $target.find('.soso').bind('clear', function () {
-            activeArr=[];
-            $target.find("input[type=text]").show();
-            if(soparams[thisid] && $target.attr('linkage')){
-                if($target.attr('linkage')=="all"){
-                    soparams[thisid]($target.find(".soso").data('dataAll'), thisid);
-                }else{
-                    startlink=$target.find(".soso").data('link');
-                    soparams[thisid](startlink, thisid);
-                }
-                $target.find("input[type=text]").focus();
-            }else{
-                sosoState();
-            }
-            $target.find('ol').html($(olinput).addClass('start'));
-        })
         //结果项点击清除事件
         $target.find('ol').on('click','li',function(){
             var index=activeArr.indexOf($(this).data('title'));
