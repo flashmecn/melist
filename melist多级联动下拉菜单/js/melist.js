@@ -313,7 +313,7 @@ function linkageall(){
     }
     function showBtn(infor,$target){
         for(var k in infor){
-            if(infor[k].show=="true"){
+            if(infor[k].show==true || infor[k].show=="true"){
                 window.getLinkageAll(infor[k].link, $target);
                 $target.oladd(infor[k].id,infor[k].name,infor[k].title,infor[k].link);
                 if(infor[k].link){
