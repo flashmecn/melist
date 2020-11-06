@@ -305,10 +305,7 @@ function linkageall(){
     }
     window.setLinkageAll=function ($target,data) {
         $target.data('dataAll',data);
-        $target.sotag(data, true, '<li></li>', function (subData, id) {
-            window.getLinkageAll(subData, $('#' + id));
-        });
-        filteroption($target, $target.attr('id'));
+        window.getLinkageAll(data, $target);
         showBtn(data, $target);//初始show菜单
     }
     function showBtn(infor,$target){
