@@ -300,8 +300,8 @@ function linkageall(){
     window.getLinkageAll=function(subData,$target){
         $target.sotag(subData, true, '<li></li>', function(subData,id){
             window.getLinkageAll(subData,$('#'+id));
-            filteroption($('#'+id), id);
         });
+        filteroption($target, $target.attr('id'));
     }
     window.setLinkageAll=function ($target,data) {
         $target.data('dataAll',data);
