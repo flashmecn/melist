@@ -4,8 +4,7 @@
 // 2020-10-22
  * ==========================================
 */
-function filteroption($root,$id) {  //初始化列表，(对象,ID)
-    $root.attr("thisid",$id);
+function filteroption($root) {  //初始化列表，(对象)
     var tempul;
     tempul = $root.clone(true);
     tempul.children().each(function() {
@@ -17,17 +16,17 @@ function filteroption($root,$id) {  //初始化列表，(对象,ID)
         $(this).attr("mkb", (pyword).toLowerCase());
         $(this).attr("mkc", (supperword).toLowerCase());
     });
-    window[$id] = tempul;
+    window[$root.attr('id')] = tempul;
 }
 
 //筛选符合的列表项
 function resetOption(keys, $root) {
-    if(!window[$root.attr("thisid")]){
+    if(!window[$root.attr("id")]){
         return;
     }
     keys = keys.toLowerCase();
     $root.children().remove();
-    var duplul = window[$root.attr("thisid")];
+    var duplul = window[$root.attr("id")];
     if (duplul==undefined){
         return false;
     }
@@ -283,12 +282,12 @@ function linkageall(){
                     $target.sotag(ev.infor, true, '<li></li>', function(newurl,id){
                         window.getLinkage(newurl,$('#'+id),linkage);
                     });
-                    filteroption($target, $target.attr('id'));
+                    filteroption($target);
                 }else if(linkage=='all'){
                     window.setLinkageAll($target, ev.infor);
                 }else{
                     $target.sotag(ev.infor, true, '<li></li>');
-                    filteroption($target, $target.attr('id'));
+                    filteroption($target);
                 }
                 //----
             },
@@ -301,7 +300,7 @@ function linkageall(){
         $target.sotag(subData, true, '<li></li>', function(subData,id){
             window.getLinkageAll(subData,$('#'+id));
         });
-        filteroption($target, $target.attr('id'));
+        filteroption($target);
     }
     window.setLinkageAll=function ($target,data) {
         $target.data('dataAll',data);
